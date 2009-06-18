@@ -1,0 +1,139 @@
+body
+{
+	background: #fff;
+	color: #555;
+}
+a
+{
+	color: #666;
+}
+a:hover
+{
+	color: #333;
+	background: #0BA3EC;
+}
+h1 b
+{
+	color: #efefef;
+}
+h2
+{
+	background: #dfdfdf;
+	color: #666;
+}
+
+h2.locationdisplay
+{
+	background: #dfdfdf;
+	color: #666;
+}
+#slidebox
+{
+	background: #0ba3ec url(../img/lgrad.jpg) top left repeat-x;
+	border-bottom: 3px solid #fff;
+}
+#slidebox h2
+{
+	color:#444;
+}
+#slidebox p
+{
+	color: #555;
+}
+#header
+{
+	background: #efefef url(../img/logo_monitter3.gif) 10px 2px no-repeat;;
+	color: #444;
+	border-bottom: 3px solid #ccc;	
+}
+
+#header a.stumble
+{
+	background: url(../img/stumbleuponlight.gif);
+}
+#header a.digg
+{
+	background: url(../img/digglight.gif);
+}
+#header a.tweet
+{
+	background: url(../img/icon_twitterlite.gif);
+}
+.column input
+{
+	background: #FFF;
+	color: #444;
+	border: 3px solid #ccc;
+}
+.tweet
+{
+	background: #efefef;
+} 
+.tweet img
+{
+	border: 2px solid #fff;
+	background: #444;
+}
+#foot
+{
+	color: #444;
+	background: #ccc;
+	border-top: 3px solid #999;	
+}
+#foot a
+{
+	color: #666;
+}
+#help,#profile div.inner,
+#tweetbox div.inner
+{
+	background: #fff;
+	border: 2px solid #777;
+}
+#help dt
+{
+	color:#444;
+}
+#Help .closer,#profile .closer
+{
+	background: #efefef;
+	border: 2px solid #777;
+	color: #555;
+}
+#map
+{
+	border-bottom: 3px solid #555;
+}
+#locationbox 
+{
+	background: #000 url(../img/grad.gif) top left repeat-x;
+	border-bottom: 3px solid #555;
+
+}
+input#location
+{
+	border: 2px solid #ccc;
+	background: #fff;
+	color: #444;
+}
+
+div.loader
+{
+	background: #efefef url(../img/loading_light.gif) center no-repeat;
+	color: #444;
+}
+
+#add_column,#remove_column,#pause_button
+{
+	background: #fff;
+	color: #999;
+	border: 2px solid #555;
+}
+.tweet a.miniicon
+{
+	background-color: #EFEFEF !important; 
+}
+#tweetbox h2
+{
+color: #ccc;
+}

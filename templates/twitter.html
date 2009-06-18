@@ -1,0 +1,18 @@
+{% extends "base.html" %} 
+
+{% block javascript %}
+<script type="text/javascript" src="/media/js/monitter.min.js"></script>
+{% endblock  %}
+
+{% block content %}
+<h1>Twitter for Iranian Election</h1>
+<h2>Iranian Election 2009</h2>
+
+{% for k in keywords %} 
+<div class="monitter" id="tweets{{ forloop.counter }}" title="{{ k }}" lang="en"></div>
+{% endfor %} 
+
+
+<script src='http://twist.flaptor.com/embed?size=large&gram=iranelection&span=168&'></script>
+
+{% endblock %}
