@@ -1,0 +1,5 @@
+cron:
+- description: fetch news
+  url: /tasks/fetchnews/
+  schedule: every 5 minutes
+

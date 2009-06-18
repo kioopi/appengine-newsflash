@@ -1,0 +1,80 @@
+{% extends "base.html" %} 
+
+{% block javascript %}
+<script type="text/javascript" src="/media/js/jQuery.masonry.js"></script>
+<script type="text/javascript" src="/media/js/jquery.tools.min.js"></script>
+<script type="text/javascript" >
+$(document).ready(function(){
+   var open_top, openleft; 
+   $('#news').masonry();
+   $('#news li').expose({ 
+    // move mask a little lower when exposing takes effect 
+    onBeforeLoad: function() { 
+        var x = this.getExposed();
+        open_top = x.css('top'); 
+        open_left = x.css('left'); 
+        x.animate({width: '80%',
+                  top: '20px',
+                  left: '20px',
+
+
+        })
+
+          .css({ 
+                // position:'absolute',
+          margin:'auto',
+          }).find('.text').show(); 
+        
+      }, 
+    onLoad : function() {
+
+    }, 
+    onBeforeClose: function() { 
+        this.getExposed()
+          .animate({width: '288px',
+                    top: open_top,
+                    left: open_left,
+                   })
+          .css({ 
+
+         // position:'static',
+          margin:'3px',
+         }).find('.text').hide(); 
+      }, 
+   
+
+   });
+
+   $('.readlink').click(function(e){
+      $(this).parent('li').expose().load();  
+      e.preventDefault();
+       
+   });
+
+});
+
+</script>
+
+{% endblock  %}
+
+{% block content %}
+<h1>News Iranian Election</h1>
+
+<br /> 
+<hr /> 
+
+<ul id="news"> 
+{% for item in news %} 
+<li> 
+   <h4>{{ item.date|date:"d.m.Y H:i" }}</h4> 
+   <h3>{{ item.title }}</h3> 
+   <div class="text" style="display:none;">{{ item.text }}</div> 
+   <a href="{{ item.url }}" class="readlink">Read</a> 
+   <a href="{{ item.url }}">Go Source</a> 
+</li>
+{% endfor %}
+</ul> 
+
+
+
+{% endblock %}

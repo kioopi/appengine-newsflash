@@ -1,5 +1,5 @@
 application: irannewsflash
-version: 1-1
+version: 1-2-news-in-db
 runtime: python
 api_version: 1
 

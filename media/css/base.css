@@ -1,0 +1,47 @@
+body{
+  background: #434343;
+font-family:georgia,times,serif;
+}
+
+#container{
+border:1px solid #434346;
+width: 960px;
+}
+
+#news li {
+  background:#EDF3E9;
+  width:288px;
+  margin: 3px;
+  border: 3px solid #AAA;
+  padding: 0 0px 6px 0px;
+  float: left;
+  list-style: none;
+}
+
+#news li h4 {
+  background:#CED2E7;
+  margin-bottom:3px;
+  padding:2px;
+} 
+
+#news li .text {
+  padding:20px;
+}
+
+#news li .text p {
+  padding:10px;
+}  
+
+#news li .text img {
+  float:left;
+  margin:1px;
+}
+
+#news li .text a {
+   color:blue; 
+   text-decoration:underline; 
+
+#news li .text h1,  #news li .text h2, #news li .text h3   {
+  font-size:2em;
+  margin-bottom:10px;
+}
