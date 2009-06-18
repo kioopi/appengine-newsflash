@@ -92,7 +92,7 @@ class InitData(webapp.RequestHandler):
 
 application = webapp.WSGIApplication(
    [
-    ('/', MainPage),
+    ('/', NewsPage),
     ('/twitter/', TwitterPage),
     ('/news/', NewsPage), 
     ('/news.json', NewsJson), 

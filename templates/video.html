@@ -83,7 +83,7 @@ Search Results:
           cycleTime : GSvideoBar.CYCLE_TIME_MEDIUM,
           cycleMode : GSvideoBar.CYCLE_MODE_LINEAR,
           //executeList : ["ytchannel:ShangoRBG","ytchannel:Halbertis","ytchannel:farhad43","ytchannel:abatebi","ytchannel:iranlover100","ytchannel:SasanShah1","ytchannel:Zendoaut","ytchannel:hadihadithegreat","ytchannel:saeidkermanshah"]
-          executeList : ["ShangoRBG" {% for u in users %},"{{ u }}"{% endfor %}] 
+          executeList : ["ytchannel:ShangoRBG" {% for u in users %},"ytchannel:{{ u }}"{% endfor %}] 
 
 
         }
