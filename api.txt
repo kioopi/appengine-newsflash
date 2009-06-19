@@ -1,0 +1,14 @@
+
+-- restlike api for news and voting 
+
+* get_news
+     takes a date as parameter and returns news items later than that as json
+
+* post_news 
+     takes news dataset and adds it to the db
+
+* vote 
+     takes a NewsItem key and adds the loggeg-in user to votes
+     returns the news object with the updated vote count ? 
+
+*   
