@@ -27,6 +27,14 @@
     <li ><a href="/videos/">Videos</a></li>
   </ul>
 
+  <div id="login"> 
+  {% if user %} 
+     Logged in as {{ user }}. <a href="{{ logouturl }}">logout</a>
+  {% else %} 
+     Not logged in. <a href="{{ loginurl }}">login</a> 
+  {% endif %} 
+  </div>
+
 </div>
 <div id="content">
 {% block content %} 

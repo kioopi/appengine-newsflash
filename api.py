@@ -11,6 +11,8 @@ import settings
 
 from google.appengine.api import urlfetch
 
+import cgi 
+
 class GetNews(webapp.RequestHandler):
     def get(self): 
          # takes a date as parameter and returns news items later than that as json
@@ -25,8 +27,18 @@ class Vote(webapp.RequestHandler):
     def post(self): 
         # takes a NewsItem key and adds the loggeg-in user to votes
         # returns the news object with the updated vote count ?
-        pass
+        user = users.get_current_user()
+        if user: 
+            key = cgi.escape(self.request.get('key'))
+            if key: 
+                item = NewsItem.get_by_key_name(key)  
+                if user not in item.votes: 
+                    item.votes.append(user)
+                    item.put()  
+                    self.response.out.write("It's done!")
 
+        else:
+            self.error(401) 
 
 class MainPage(webapp.RequestHandler):
     def get(self):
@@ -35,12 +47,13 @@ class MainPage(webapp.RequestHandler):
         self.response.out.write(
             template.render(tmpl('templates/twitter.html'),
             context ))
+
 class NewsJson(webapp.RequestHandler): 
     def get(self):  
         url = settings.YAHOO_PIPE % 'json' 
         result = urlfetch.fetch(url) 
         if result.status_code == 200:
-            # FIXME this needs the proper mime
+            self.response.headers["Content-Type"] = "application/json"
             self.response.out.write(result.content) 
         else: 
             self.response.out.write('err') 
@@ -49,8 +62,8 @@ class NewsJson(webapp.RequestHandler):
 
 application = webapp.WSGIApplication(
    [
-    ('/', NewsPage),
     ('/news/', GetNews), 
+    ('/api/vote/', Vote), 
     ('/allnews', NewsJson), 
    ], debug=True)
 

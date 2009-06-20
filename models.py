@@ -22,6 +22,9 @@ class NewsItem(db.Model):
 
     votes = db.ListProperty(users.User)
 
+    def votecount(self): 
+        return len(self.votes) 
+
 
 class Comment(db.Model):
     newsitem_url = db.LinkProperty()
