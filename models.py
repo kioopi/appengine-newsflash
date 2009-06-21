@@ -11,6 +11,9 @@ class Twitter(db.Model):
     keywords = db.StringListProperty() 
 
 
+class NewsSource(db.Model): 
+    pass
+
 
 class NewsItem(db.Model):
     url = db.LinkProperty()
@@ -19,11 +22,19 @@ class NewsItem(db.Model):
     text = db.TextProperty() 
     date = db.DateTimeProperty()  
 
+    orderdate = db.DateTimeProperty() 
 
-    votes = db.ListProperty(users.User)
+    bumps = db.ListProperty(users.User)
+    sages = db.ListProperty(users.User)
 
-    def votecount(self): 
-        return len(self.votes) 
+    def bumpyness(self): 
+        return len(self.bumps) - len(self.sages) 
+
+    
+class Shout(db.Model): 
+    date = db.DateTimeProperty(auto_now_add=True)  
+    text = db.TextProperty() 
+    name = db.StringProperty() 
 
 
 class Comment(db.Model):

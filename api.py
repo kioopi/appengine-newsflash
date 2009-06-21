@@ -17,13 +17,14 @@ class GetNews(webapp.RequestHandler):
     def get(self): 
          # takes a date as parameter and returns news items later than that as json
         pass
+        
 
 class PostNews(webapp.RequestHandler): 
     def post(self): 
         # takes news dataset and adds it to the db
         pass
 
-class Vote(webapp.RequestHandler): 
+class Bump(webapp.RequestHandler): 
     def post(self): 
         # takes a NewsItem key and adds the loggeg-in user to votes
         # returns the news object with the updated vote count ?
@@ -32,8 +33,8 @@ class Vote(webapp.RequestHandler):
             key = cgi.escape(self.request.get('key'))
             if key: 
                 item = NewsItem.get_by_key_name(key)  
-                if user not in item.votes: 
-                    item.votes.append(user)
+                if user not in item.bumps: 
+                    item.bumps.append(user)
                     item.put()  
                     self.response.out.write("It's done!")
 
@@ -62,9 +63,9 @@ class NewsJson(webapp.RequestHandler):
 
 application = webapp.WSGIApplication(
    [
-    ('/news/', GetNews), 
-    ('/api/vote/', Vote), 
-    ('/allnews', NewsJson), 
+    ('/api/news/', GetNews), 
+    ('/api/bump/', Bump), 
+    ('/api/allnews', NewsJson), 
    ], debug=True)
 
 

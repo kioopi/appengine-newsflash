@@ -50,10 +50,10 @@ $(document).ready(function(){
       e.preventDefault();
    });
 
-   $('.votelink').click(function(e){
+   $('.bumplink').click(function(e){
 
       var key = $(this).parent('li').find('.dbkey').html();  
-      $.post('/api/vote/', { 'key': key } ); 
+      $.post('/api/bump/', { 'key': key } ); 
       e.preventDefault();
    });
 
@@ -74,13 +74,16 @@ $(document).ready(function(){
 {% for item in news %} 
 <li> 
    <h4>{{ item.date|date:"d.m.Y H:i" }}</h4> 
-   <h3>{{ item.title }} [{{ item.votecount }}]</h3> 
+   <h3>{{ item.title }} [{{ item.bumpyness }}]</h3> 
 
    <div class="dbkey" style="display:none;">{{ item.key.name }}</div> 
    <div class="text" style="display:none;">{{ item.text }}</div> 
    <a href="{{ item.url }}" class="readlink">Read</a> 
-   <a href="{{ item.url }}">Go Source</a> 
-   <a href="{{ item.url }}" class="votelink">[+]</a> 
+   <a href="{{ item.url }}">Go Source</a>  
+
+   
+   <a href="{{ item.url }}" class="bumplink">[+]</a> 
+
 </li>
 {% endfor %}
 </ul> 

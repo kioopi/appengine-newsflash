@@ -5,7 +5,9 @@ from google.appengine.api import users
 from google.appengine.ext.webapp import template
 
 from util import tmpl, add_user_to_context
-from models import Videos, Twitter, NewsItem
+from models import Videos, Twitter, NewsItem, Shout
+
+import cgi
 
 import settings
 
@@ -34,9 +36,10 @@ class FetchNews(webapp.RequestHandler):
                 item.title = i.title 
                 item.text = i.summary
                 item.date = datetime.datetime(*i.date_parsed[:6])
+                item.orderdate = datetime.datetime(*i.date_parsed[:6])
                 item.put() 
 
-            items = db.GqlQuery("SELECT * FROM NewsItem ORDER BY date DESC LIMIT 100")
+            items = db.GqlQuery("SELECT * FROM NewsItem ORDER BY orderdate DESC LIMIT 100")
  
             context = {'news':items }
             #context = add_user_to_context(context)
@@ -105,7 +108,27 @@ class InitData(webapp.RequestHandler):
         self.response.out.write('init\'d')
 
     
+class ShoutBox(webapp.RequestHandler): 
+     def get(self):
+        items = db.GqlQuery("SELECT * FROM Shout ORDER BY date DESC LIMIT 25")
+ 
+        context = add_user_to_context({'shouts':items }) 
+        #context = add_user_to_context(context)
+        self.response.out.write(
+               template.render(tmpl('templates/shoutbox.html'),
+               context ))
+   
 
+class PostShout(webapp.RequestHandler): 
+     def post(self): 
+         text = cgi.escape(self.request.get('text')) 
+         name = cgi.escape(self.request.get('name')) 
+         s = Shout(text=text, name=name)
+         s.put() 
+         self.redirect('/shoutbox/')
+
+     def get(self):
+         self.redirect('/shoutbox/')
 
 
 application = webapp.WSGIApplication(
@@ -118,6 +141,9 @@ application = webapp.WSGIApplication(
     ('/videos/', VideoPage), 
     ('/tasks/fetchnews/', FetchNews), 
     #('/gnarf/', InitData), 
+    ('/shoutbox/', ShoutBox), 
+    ('/shoutbox/post/', PostShout), 
+
 
    ], debug=True)
 

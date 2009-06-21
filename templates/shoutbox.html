@@ -1,0 +1,56 @@
+{% extends "base.html" %} 
+
+{% block javascript %}
+<script type="text/javascript" src="/media/js/jQuery.masonry.js"></script>
+<script type="text/javascript" src="/media/js/jquery.tools.min.js"></script>
+<script type="text/javascript" >
+$(document).ready(function(){
+   $('.readlink').click(function(e){
+      $(this).parent('li').expose().load();  
+      e.preventDefault();
+   });
+
+   $('.bumplink').click(function(e){
+
+      var key = $(this).parent('li').find('.dbkey').html();  
+      $.post('/api/bump/', { 'key': key } ); 
+      e.preventDefault();
+   });
+
+
+});
+
+</script>
+
+{% endblock  %}
+
+{% block content %}
+<h1>Soutbox</h1>
+
+<br /> 
+<hr /> 
+<p>Post to the shoutbox.</p> 
+<form action="/shoutbox/post/" method="post">
+<!-- hier folgen die Formularelemente -->
+<label for="text">Text:</label>
+<textarea name="text" id="text">
+</textarea><br />
+<label>Name:<input type="text" id="name" name="name" value="" /></label>
+<input type="submit"> 
+
+</form>
+
+<br /> 
+<hr /> 
+
+<ul id="shouts"> 
+{% for item in shouts %} 
+<li class="{% cycle pare,impare %}"> 
+   <h4>{{ item.date|date:"d.m.Y H:i" }}</h4> 
+   <p>{{ item.text }}</p> 
+   <div class="name">{{ item.name }}</div>
+</li>
+{% endfor %}
+</ul> 
+
+{% endblock %}
