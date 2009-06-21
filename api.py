@@ -36,7 +36,7 @@ class Bump(webapp.RequestHandler):
                 if user not in item.bumps: 
                     item.bumps.append(user)
                     item.put()  
-                    self.response.out.write("It's done!")
+                    self.response.out.write(item.key().name())
 
         else:
             self.error(401) 

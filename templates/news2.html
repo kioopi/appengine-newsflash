@@ -53,7 +53,19 @@ $(document).ready(function(){
    $('.bumplink').click(function(e){
 
       var key = $(this).parent('li').find('.dbkey').html();  
-      $.post('/api/bump/', { 'key': key } ); 
+      $.post('/api/bump/', { 'key': key }, function(data,status){
+         if(status == 'success'){
+            var bumpy = false; 
+             $('li.item .dbkey').each(function(){
+                if( $(this).html() == data ){
+                   bumpy = $(this).parent('li.item').find('.bumpy'); 
+                   return false;
+                } 
+             });             
+            if(bumpy) bumpy.html(parseInt(bumpy.html())+1);
+
+         } 
+      }); 
       e.preventDefault();
    });
 
@@ -72,9 +84,9 @@ $(document).ready(function(){
 
 <ul id="news"> 
 {% for item in news %} 
-<li> 
+<li class="item" id="{{ item.key.name"> 
    <h4>{{ item.date|date:"d.m.Y H:i" }}</h4> 
-   <h3>{{ item.title }} [{{ item.bumpyness }}]</h3> 
+   <h3>{{ item.title }} </h3> 
 
    <div class="dbkey" style="display:none;">{{ item.key.name }}</div> 
    <div class="text" style="display:none;">{{ item.text }}</div> 
@@ -82,7 +94,7 @@ $(document).ready(function(){
    <a href="{{ item.url }}">Go Source</a>  
 
    
-   <a href="{{ item.url }}" class="bumplink">[+]</a> 
+   <a href="{{ item.url }}" class="bumplink">[+]</a>[<span class="bumpy">{{ item.bumpyness }}</span>]
 
 </li>
 {% endfor %}
