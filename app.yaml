@@ -7,9 +7,14 @@ handlers:
 - url: /media
   static_dir: media
 
+- url: /admin/.*
+  script: admin.py
+  login: admin
+
 - url: /api/.*
   script: api.py
 
 - url: /.*
   script: inf.py
+
 

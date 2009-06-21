@@ -1,0 +1,46 @@
+{% extends "adminbase.html" %} 
+
+{% block javascript %}
+<script type="text/javascript" src="/media/js/jQuery.masonry.js"></script>
+<script type="text/javascript" src="/media/js/jquery.tools.min.js"></script>
+<script type="text/javascript" >
+$(document).ready(function(){
+
+
+});
+
+</script>
+
+{% endblock  %}
+
+{% block content %}
+<h1>Feed-Admin:</h1>
+
+<ul id="feeds"> 
+{% for item in feeds %} 
+<li class="{% cycle pare,impare %}"> 
+   {{ item.name }}  
+   <a href="{{ item.url }}">{{ item.url }}</a> 
+   Stand: {{ item.date|date:"d.m.Y H:i" }} 
+   <a href="">Jetzt abholen</a> 
+</li>
+{% endfor %}
+</ul> 
+
+
+
+<br /> 
+<hr /> 
+<p>.</p> 
+<form action="/admin/feeds/post/" method="post">
+<!-- hier folgen die Formularelemente -->
+<label>Name:<input type="text" id="name" name="name" value="" /></label>
+<label>Url:<input type="text" id="url" name="url" value="" /></label>
+<input type="submit"> 
+
+</form>
+
+<br /> 
+<hr /> 
+
+{% endblock %}

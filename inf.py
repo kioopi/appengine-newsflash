@@ -1,7 +1,7 @@
 from google.appengine.ext import webapp
 from google.appengine.ext import db 
 from google.appengine.ext.webapp.util import run_wsgi_app
-from google.appengine.api import users
+from google.appengine.api import users, urlfetch
 from google.appengine.ext.webapp import template
 
 from util import tmpl, add_user_to_context
@@ -10,7 +10,8 @@ from models import Videos, Twitter, NewsItem, Shout
 import cgi
 
 import settings
-
+import urllib
+import base64
 
 class MainPage(webapp.RequestHandler):
     def get(self):
@@ -125,6 +126,20 @@ class PostShout(webapp.RequestHandler):
          name = cgi.escape(self.request.get('name')) 
          s = Shout(text=text, name=name)
          s.put() 
+
+         # FIXME 
+         apendix = ' #iranelection'
+         chars = 140 - len(apendix) 
+           
+         from secretsettings import twitter_password, twitter_username  
+         payload= {'status' : text[:chars] + apendix,  'source' : "iranbreakingnews"}
+         payload= urllib.urlencode(payload)
+         base64string = base64.encodestring('%s:%s' % (twitter_username, twitter_password))[:-1]
+         headers = {'Authorization': "Basic %s" % base64string} 
+         url = "http://twitter.com/statuses/update.xml"
+         result = urlfetch.fetch(url, payload=payload, method=urlfetch.POST, headers=headers)
+
+
          self.redirect('/shoutbox/')
 
      def get(self):

@@ -1,0 +1,4 @@
+queue:
+- name: fetch-news-queue
+  rate: 3/m
+

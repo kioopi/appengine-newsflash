@@ -11,8 +11,11 @@ class Twitter(db.Model):
     keywords = db.StringListProperty() 
 
 
-class NewsSource(db.Model): 
-    pass
+class NewsFeed(db.Model): 
+    name = db.StringProperty() 
+    last_fetch = db.DateTimeProperty()  
+    url = db.LinkProperty()
+    active = db.BooleanProperty(default=True) 
 
 
 class NewsItem(db.Model):
@@ -26,6 +29,8 @@ class NewsItem(db.Model):
 
     bumps = db.ListProperty(users.User)
     sages = db.ListProperty(users.User)
+
+    source = db.ReferenceProperty(NewsFeed) 
 
     def bumpyness(self): 
         return len(self.bumps) - len(self.sages) 

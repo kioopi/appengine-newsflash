@@ -12,6 +12,8 @@ def add_user_to_context(context={}):
     if user:
          context['user'] = user
          context['logouturl'] = users.create_logout_url("/")
+         if users.is_current_user_admin(): 
+             context['admin'] = True
     else:
          context['loginurl'] = users.create_login_url("/")
     return context

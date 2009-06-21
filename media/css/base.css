@@ -1,7 +1,24 @@
+
+.clear { 
+   clear:both;
+} 
+
 body{
-  background: #434343;
-font-family:georgia,times,serif;
+  #background: #434343;
+  background: #000;
+font-family:verdana, sans-serif;
+  padding:20px;
 }
+
+ul#navigation li { 
+   float:left; 
+   margin:5px;
+} 
+
+div#login {
+   float:right;
+}
+
 
 #container{
 border:1px solid #434346;

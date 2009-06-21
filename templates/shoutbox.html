@@ -1,22 +1,8 @@
 {% extends "base.html" %} 
 
 {% block javascript %}
-<script type="text/javascript" src="/media/js/jQuery.masonry.js"></script>
-<script type="text/javascript" src="/media/js/jquery.tools.min.js"></script>
 <script type="text/javascript" >
 $(document).ready(function(){
-   $('.readlink').click(function(e){
-      $(this).parent('li').expose().load();  
-      e.preventDefault();
-   });
-
-   $('.bumplink').click(function(e){
-
-      var key = $(this).parent('li').find('.dbkey').html();  
-      $.post('/api/bump/', { 'key': key } ); 
-      e.preventDefault();
-   });
-
 
 });
 
@@ -25,11 +11,12 @@ $(document).ready(function(){
 {% endblock  %}
 
 {% block content %}
-<h1>Soutbox</h1>
+<h1>Shoutbox</h1>
 
 <br /> 
 <hr /> 
 <p>Post to the shoutbox.</p> 
+<p>Everything thats posted here will be tweeted via <a href="http://twitter.com/Iranbreakingnew">iranbreakingnew</a>. Please don't abuse it or we will have discontinue the service.</p> 
 <form action="/shoutbox/post/" method="post">
 <!-- hier folgen die Formularelemente -->
 <label for="text">Text:</label>
