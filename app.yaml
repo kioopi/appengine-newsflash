@@ -1,5 +1,5 @@
 application: irannewsflash
-version: 1-3-shoutbox
+version: 1-3-twitterintegration
 runtime: python
 api_version: 1
 
