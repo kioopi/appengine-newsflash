@@ -9,7 +9,7 @@ from models import Videos, Twitter, NewsItem
 
 import settings
 
-from google.appengine.api import urlfetch
+from google.appengine.labs.api import urlfetch
 
 import cgi 
 

@@ -4,7 +4,7 @@ from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.api import users
 from google.appengine.ext.webapp import template
 
-from util import tmpl
+from util import tmpl, add_user_to_context
 from models import Videos, Twitter, NewsItem, NewsFeed
 
 import settings
@@ -36,19 +36,24 @@ class PostFeed(webapp.RequestHandler):
          
          taskqueue.add(queue_name='fetch-news-queue', url='/admin/feeds/fetch/', params={'key':f.key})
 
-          
          self.redirect('/admin/feeds/')
 
      def get(self):
          self.redirect('/admin/feeds/')
 
+class FeedPreview(webapp.RequestHandler): 
+    def get(self):     
+        url = cgi.escape(self.request.get('url'))
+        result = urlfetch.fetch(feed.url)
+        if result.status_code == 200:
+            rssfeed = feedparser.parse(result.content)
+             
+        
   
 class FetchFeed(webapp.RequestHandler): 
-
-     key = self.request.get('key')
-     feed = NewsFeed.get_by_key_name(key)
-
      def post(self):
+         key = self.request.get('key')
+         feed = NewsFeed.get_by_key_name(key)
          result = urlfetch.fetch(feed.url)
          if result.status_code == 200:
              rssfeed = feedparser.parse(result.content)
