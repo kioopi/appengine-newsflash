@@ -1,0 +1,16 @@
+<ul class="feed">
+ {% for item in feed.entries %} 
+ <li class="item"> 
+   <a class="title" href="{{ item.link }}" > 
+      {{ item.title }}
+   </a> 
+   <div class="pubdate">
+     {{ item.date_parsed|feedparsed_date|date:"d.m.Y" 
+   </div>
+   <div class="author">{{ item.author }}</div> 
+   <p> 
+    {{ item.summary }} 
+   </p> 
+ </li>
+ {% endfor %} 
+</ul> 

@@ -17,6 +17,9 @@ import cgi
 from google.appengine.api.labs import taskqueue
 
 
+"""Load custom Django template filters"""
+webapp.template.register_template_library('templatetags.customfilters')
+
 class NewsFeeds(webapp.RequestHandler):
     def get(self): 
         items = db.GqlQuery("SELECT * FROM NewsFeed ORDER BY date DESC LIMIT 25")
@@ -47,7 +50,13 @@ class FeedPreview(webapp.RequestHandler):
         result = urlfetch.fetch(feed.url)
         if result.status_code == 200:
             rssfeed = feedparser.parse(result.content)
-             
+            self.response.out.write(
+               template.render(tmpl('templates/admin/feedpreview.html'),
+               context ))
+        else:  
+            self.response.out.write('error') 
+ 
+            
         
   
 class FetchFeed(webapp.RequestHandler): 

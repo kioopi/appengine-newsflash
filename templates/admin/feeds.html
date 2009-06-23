@@ -6,7 +6,10 @@
 <script type="text/javascript" >
 $(document).ready(function(){
 
-
+   $('previewbutton').click(function(){
+       var url = $('input#id').val();
+       # TODO : urlescape, call preview per ajax, display result, joy
+   });
 });
 
 </script>
@@ -37,8 +40,11 @@ $(document).ready(function(){
 <label>Url:<input type="text" id="url" name="url" value="" /></label>
 <input type="submit"> 
 
+<a href="" id="previewbutton">preview</a> 
 </form>
 
+<hr /> 
+<div class="feedpreview"></div>
 <br /> 
 <hr /> 
 
