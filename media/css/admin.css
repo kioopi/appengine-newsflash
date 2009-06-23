@@ -1,0 +1,58 @@
+
+/* newfeedform */ 
+#newfeedform label  {
+   display:block; 
+ 
+}
+
+#newfeedform input  {
+  width: 30em;  
+} 
+
+
+
+/*  preview feed */ 
+.feedpreview .item {
+   width:16em;
+   margin:1em;
+   float:left;
+   padding:0.6em;
+   border:1px solid #E9E9E9; 
+}
+
+.feedpreview a.title {
+   # border-bottom:1px solid #333; 
+   #  margin-bottom:1.5em;
+   text-decoration:none;
+}
+
+.feedpreview div.title {
+    border-bottom:1px solid #333; 
+    margin-bottom:0.3em;
+    padding:0.4em;
+}
+
+.feedpreview div.title:hover {
+    background:#DDD;
+} 
+
+
+
+
+.feedpreview .pubdate, .feedpreview .author {
+   float:right;
+   clear:right;
+   font-size:0.7em;
+
+}
+
+.feedpreview p {
+  margin-top:1em;
+  clear:right;
+
+}
+
+
+.feedpreview {
+
+}

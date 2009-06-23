@@ -9,6 +9,8 @@ from models import Videos, Twitter, NewsItem, NewsFeed
 
 import settings
 
+import feedparser
+
 from google.appengine.api import urlfetch
 
 import cgi 
@@ -47,12 +49,19 @@ class PostFeed(webapp.RequestHandler):
 class FeedPreview(webapp.RequestHandler): 
     def get(self):     
         url = cgi.escape(self.request.get('url'))
-        result = urlfetch.fetch(feed.url)
+        if not url: 
+           self.response.out.write('Please pass a feed-url as a get-param "url".')
+        try: 
+           result = urlfetch.fetch(url)
+        except: 
+           self.response.out.write('Invalid or non-existing URL.')
+            
+        
         if result.status_code == 200:
             rssfeed = feedparser.parse(result.content)
             self.response.out.write(
                template.render(tmpl('templates/admin/feedpreview.html'),
-               context ))
+               {'feed': rssfeed} ))
         else:  
             self.response.out.write('error') 
  
@@ -63,6 +72,7 @@ class FetchFeed(webapp.RequestHandler):
      def post(self):
          key = self.request.get('key')
          feed = NewsFeed.get_by_key_name(key)
+         # FIXME check if feed was retrieved
          result = urlfetch.fetch(feed.url)
          if result.status_code == 200:
              rssfeed = feedparser.parse(result.content)
@@ -91,6 +101,7 @@ application = webapp.WSGIApplication(
     ('/admin/', NewsFeeds), 
     ('/admin/feeds/', NewsFeeds), 
     ('/admin/feeds/post/', PostFeed), 
+    ('/admin/feeds/preview/', FeedPreview), 
     ('/admin/feeds/fetch/', PostFeed), 
    ], debug=True)
 

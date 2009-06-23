@@ -1,11 +1,11 @@
 <ul class="feed">
  {% for item in feed.entries %} 
  <li class="item"> 
-   <a class="title" href="{{ item.link }}" > 
+   <div class="title"><a class="title" href="{{ item.link }}" > 
       {{ item.title }}
-   </a> 
+   </a></div>
    <div class="pubdate">
-     {{ item.date_parsed|feedparsed_date|date:"d.m.Y" 
+     {{ item.date_parsed|feedparsed_date|date:"d.m.Y" }}
    </div>
    <div class="author">{{ item.author }}</div> 
    <p> 
